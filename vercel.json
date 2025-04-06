@@ -8,7 +8,7 @@
       }
     ],
     "routes": [
-      { "src": "/(.*)", "dest": "stanbicx-front/$1" }
+      { "src": "/(.*)", "dest": "/" }
     ]
   }
   
