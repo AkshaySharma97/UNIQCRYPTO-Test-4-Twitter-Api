@@ -1,70 +1,134 @@
-# Getting Started with Create React App
+StanbicX Twitter OTP Authentication App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a React + Node.js full-stack application for authenticating users via Twitter OAuth, sending them an OTP via Twitter DM, and granting access to a dashboard upon successful verification.
 
-## Available Scripts
+ 🚀 Features
 
-In the project directory, you can run:
+- Twitter OAuth 1.0a login
+- One-Time Password (OTP) sent via Twitter DM
+- OTP verification
+- Dashboard access upon successful login
+- MySQL database integration
+- Session and state management
 
-### `npm start`
+ 🧰 Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+ Frontend
+- ReactJS (Bootstrapped with Create React App)
+- Bootstrap (for UI)
+- Axios (for API calls)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+ Backend
+- Node.js
+- Express
+- Passport.js (`passport-twitter` strategy)
+- MySQL (via `mysql2` or `sequelize`)
+- `dotenv`, `cors`, `express-session`, `body-parser`
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+ 🗂 Project Structure
 
-### `npm run build`
+stanbicx-twitter-auth/
+│
+├── stanbicx-front/       # React frontend
+└── stanbicx-back/           # Node.js backend
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Clone the Repository & Setup Database (from file stanbicx.sql)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+git clone https://github.com/AkshaySharma97/UNIQCRYPTO-Test-4-Twitter-Api.git
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+ 🔧 Twitter Developer Setup
 
-### `npm run eject`
+1. Go to [https://developer.twitter.com](https://developer.twitter.com)
+2. Create a Twitter Developer App
+3. Under App > User Authentication Settings:
+   - Enable OAuth 1.0a
+   - Callback URL: `http://localhost:5000/auth/twitter/callback`
+   - Website URL: `http://localhost:3000`
+4. Copy your:
+   - API Key → `TWITTER_CONSUMER_KEY`
+   - API Secret → `TWITTER_CONSUMER_SECRET`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+ 🛠️ Backend Setup
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+ Prerequisites
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Node.js & npm
+- MySQL
 
-## Learn More
+ 1. Configure `.env`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Inside `stanbicx-back/.env`:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+PORT=5000
+CLIENT_URL=http://localhost:3000
 
-### Code Splitting
+TWITTER_CONSUMER_KEY=twitter_consumer_key
+TWITTER_CONSUMER_SECRET=twitter_consumer_secret
+TWITTER_ACCESS_TOKEN=twitter_access_token
+TWITTER_ACCESS_SECRET=twitter_access_secret
+TWITTER_CALLBACK_URL=http://localhost:5000/auth/twitter/callback
+CLIENT_URL=http://localhost:3000
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=mysql_password
+DB_NAME=stanbicx_db
 
-### Analyzing the Bundle Size
+Inside `stanbicx-back/.env`:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+REACT_APP_BACKEND_URL=http://localhost:5000
 
-### Making a Progressive Web App
+ 2. Install dependencies
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+cd stanbicx-back
+npm install
 
-### Advanced Configuration
+ 3. Start backend server
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+npm start
 
-### Deployment
+Server runs at: `http://localhost:5000`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+ 🖥️ Frontend Setup
 
-### `npm run build` fails to minify
+cd stanbicx-frontend
+npm install
+npm start
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Runs at: `http://localhost:3000`
+
+
+ 💾 MySQL Database Setup
+
+1. Create MySQL database: or directly import sql file
+
+CREATE DATABASE stanbicx_db;
+
+2. Create user table for OTP (example):
+
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  twitter_id VARCHAR(255) NOT NULL,
+  username VARCHAR(255) NOT NULL,
+  otp_code VARCHAR(6),
+  otp_expires_at DATETIME
+);
+
+ ✅ How It Works
+
+1. User clicks Login with Twitter (opens Twitter OAuth flow).
+2. After login, backend receives user info and generates an OTP.
+3. OTP is sent to user's Twitter DM.
+4. User enters OTP on frontend.
+5. Backend verifies OTP and returns success.
+6. User is redirected to Dashboard.
+
+ 🛠 Local Development URLs
+
+| Service     | URL                         |
+|-------------|-----------------------------|
+| Frontend    | http://localhost:3000       |
+| Backend     | http://localhost:5000       |
+| Twitter Callback | http://localhost:5000/auth/twitter/callback |
