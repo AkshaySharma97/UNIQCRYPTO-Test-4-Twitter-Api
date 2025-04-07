@@ -9,10 +9,21 @@
             }
         }
     ],
-    "rewrites": [
+    "routes": [
         {
-            "source": "/(.*)",
-            "destination": "/stanbicx-front/index.html"
+            "src": "/(.*)",
+            "dest": "/",
+            "status": 200
+        },
+        {
+            "src": "/otp(.*)",
+            "dest": "/otp",
+            "status": 200
+        },
+        {
+            "src": "/dashboard",
+            "dest": "/dashboard",
+            "status": 200
         }
     ]
 }
