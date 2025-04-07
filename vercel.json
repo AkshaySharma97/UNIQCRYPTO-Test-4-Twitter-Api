@@ -1,15 +1,8 @@
 {
-    "version": 2,
-    "builds": [
+    "rewrites": [
         {
-            "src": "stanbicx-front/package.json",
-            "use": "@vercel/static-build",
-            "config": {
-                "distDir": "build"
-            }
+            "source": "/(.*)",
+            "destination": "/"
         }
-    ],
-    "rewrites":  [
-        {"source": "/(.*)", "destination": "/"}
     ]
 }
