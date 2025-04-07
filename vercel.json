@@ -9,21 +9,7 @@
             }
         }
     ],
-    "routes": [
-        {
-            "src": "/",
-            "dest": "/",
-            "status": 200
-        },
-        {
-            "src": "/otp",
-            "dest": "/",
-            "status": 200
-        },
-        {
-            "src": "/dashboard",
-            "dest": "/",
-            "status": 200
-        }
+    "rewrites":  [
+        {"source": "/(.*)", "destination": "/"}
     ]
 }
