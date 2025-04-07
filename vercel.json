@@ -11,18 +11,18 @@
     ],
     "routes": [
         {
-            "src": "/(.*)",
+            "src": "/",
             "dest": "/",
             "status": 200
         },
         {
-            "src": "/otp(.*)",
-            "dest": "/otp",
+            "src": "/otp",
+            "dest": "/",
             "status": 200
         },
         {
             "src": "/dashboard",
-            "dest": "/dashboard",
+            "dest": "/",
             "status": 200
         }
     ]
