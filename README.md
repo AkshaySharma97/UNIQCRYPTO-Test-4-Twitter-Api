@@ -108,12 +108,12 @@ CREATE DATABASE stanbicx_db;
 
 2. Create user table for OTP (example):
 
-CREATE TABLE users (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  twitter_id VARCHAR(255) NOT NULL,
-  username VARCHAR(255) NOT NULL,
-  otp_code VARCHAR(6),
-  otp_expires_at DATETIME
+CREATE TABLE IF NOT EXISTS `otps` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `twitter_id` varchar(255) NOT NULL,
+  `otp` varchar(10) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
 );
 
  ✅ How It Works
@@ -129,6 +129,7 @@ CREATE TABLE users (
 
 | Service     | URL                         |
 |-------------|-----------------------------|
+| Live        | https://stanbicx-front.vercel.app/  |
 | Frontend    | http://localhost:3000       |
 | Backend     | http://localhost:5000       |
 | Twitter Callback | http://localhost:5000/auth/twitter/callback |
